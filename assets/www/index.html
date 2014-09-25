@@ -1,31 +1,10 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
         <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        
-        <title>Hello World</title>
+        <title>MatchMyPet</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <!-- jQuery Mobile Style -->
         <link rel="stylesheet" href="./js/jquery-mobile-1.4.3/jquery.mobile-1.4.3.min.css" />
@@ -34,22 +13,196 @@
 		<!-- jQuery Mobile libraries -->
 		<script src="./js/jquery-1.11.1/jquery-1.11.1.min.js"></script>
 		<script src="./js/jquery-mobile-1.4.3/jquery.mobile-1.4.3.min.js"></script>
+		
+		<!-- jQuery Validation libraries -->
+		<script src="./js/jquery-validation-1.13.0/jquery.validate.min.js"></script>
 
-    </head>
+		<style>
+			label.error {
+				color: red;
+				font-size: 16px;
+				font-weight: normal;
+				line-height: 1.4;
+				margin-top: 0.5em;
+				width: 100%;
+				float: none;
+			}
+			@media screen and (orientation: portrait) {
+				label.error {
+					margin-left: 0;
+					display: block;
+				}
+			}
+			@media screen and (orientation: landscape) {
+				label.error {
+					display: inline-block;
+					margin-left: 22%;
+				}
+			}
+			em {
+				color: red;
+				font-weight: bold;
+				padding-right: .25em;
+			}
+		</style>
+
+	</head>
     <body>
-        <div data-role="page">
+    
+    	<div data-role="page" id="loginOptions">
+    		
+    		<div data-role="header">
+				<h1>Login</h1>
+			</div><!-- /header -->
+    		
+    		<div role="main" class="ui-content">
+    			<a href="#registrationPage" class="ui-shadow ui-btn ui-corner-all">Register</a>
+    			<a href="#" class="ui-shadow ui-btn ui-corner-all">Use Facebook Account</a>
+    		</div>
+    		
+    	</div>
+    	
+    	<div data-role="page" id="petsList">
+    		
+    		<div data-role="header">
+				<h1>Pets</h1>
+			</div><!-- /header -->
+			
+			<div role="main" class="ui-content">
+				<div class="ui-grid-a">
+    				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">Block 1</div></div>
+    				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">Block 2</div></div>
+    				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">Block 3</div></div>
+    				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">Block 4</div></div>
+    				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">Block 5</div></div>
+    				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">Block 6</div></div>
+    				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">Block 7</div></div>
+    				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">Block 8</div></div>
+    				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">Block 9</div></div>
+    				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">Block 10</div></div>
+				</div><!-- /grid-a -->
+			</div>
+				
+			<a href="#petsSearch" class="ui-shadow ui-btn ui-corner-all">Search</a>
+			
+    	</div>
+    	
+    	<div data-role="page" id="petsSearch">
+    		
+    		<div data-role="header">
+				<h1>Pets Search</h1>
+			</div><!-- /header -->
+			
+			<div role="main" class="ui-content">
+				<form id="petsSearchForm" data-ajax="false">
+					
+					<label for="petsSearchCategory">Category:</label>
+					<select name="petsSearchCategory" id="petsSearchCategory" required>
+					    <option value="small">One</option>
+					    <option value="medium">Two</option>
+					    <option value="large">Three</option>
+					</select>
+					
+					<fieldset data-role="controlgroup" data-type="horizontal">
+					    <legend>Gender:</legend>
+					    <input type="radio" name="petsSearchGender" id="petsSearchGenderMale" value="on" checked="checked">
+					    <label for="petsSearchGenderMale">Male</label>
+					    <input type="radio" name="petsSearchGender" id="petsSearchGenderFemale" value="off">
+					    <label for="petsSearchGenderFemale">Female</label>
+					</fieldset>
+					
+				</form>
+			</div>
+				
+    	</div>
+    
+        <div data-role="page" id="registrationPage">
 
 			<div data-role="header">
-				<h1>Page Title</h1>
+				<a href="#loginOptions" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">No text</a>
+				<h1>Registration Form</h1>
 			</div><!-- /header -->
 		
 			<div role="main" class="ui-content">
-				<p>Page content goes here.</p>
+				<form id="registrationForm" data-ajax="false">
+					
+					<label for="registrationFirstName">First Name:</label>
+					<input type="text" name="registrationFirstName" id="registrationFirstName" value="" required>
+					
+					<label for="registrationLastName">Last Name:</label>
+					<input type="text" name="registrationLastName" id="registrationLastName" value="">
+					
+					<label for="registrationEmail">Email:</label>
+					<input type="email" name="registrationEmail" id="registrationEmail" value="" required>
+					
+					<label for="registrationUserName">User Name:</label>
+					<input type="text" name="registrationUserName" id="registrationUserName" value="" required>
+					
+					<label for="registrationPassword">Password:</label>
+					<input type="password" name="registrationPassword" id="registrationPassword" value="" autocomplete="off" required>
+											
+					<label for="registrationPasswordVerification">Confirm Password:</label>
+					<input type="password" name="registrationPasswordVerification" id="registrationPasswordVerification" value="" autocomplete="off" required>
+					
+					<label for="registrationAgree">I agree</label>
+					<input type="checkbox" name="registrationAgree" id="registrationAgree" required>
+	        		
+					<input data-role="submit" type="submit" value="Register" id="registrationSubmite">
+					<!-- <button type="submit" class="ui-shadow ui-btn ui-corner-all" name="registrationSubmite" id="registrationSubmite">Submite</button>-->
+				</form>
 			</div><!-- /content -->
-		
-			<div data-role="footer">
-				<h4>Page Footer</h4>
-			</div><!-- /footer -->
+			
 		</div><!-- /page -->
+		
+		<div data-role="page" id="Agreement">
+    		
+    		<div data-role="header">
+				<h1>Agreement</h1>
+			</div><!-- /header -->
+    		
+    		<div role="main" class="ui-content">
+	    		<p>s dad dasd sadsad ad sdsad dasd dadaf afdafd asf asfd afdsasdf adsf asfd afsasf adsfasdf asdf asdf
+	    		 asdf adsf asf asfd asfdasf asfdas fdads fsaf
+	    		 fasdf asfdasf afds asf asf asf asdfasf fsadf asfsaf fasfda sdf adsfdsaf asfasfasfaf afdafdsf asdfsfs f
+	    		 a sdfsadf asdf asdf asdfasdg ghjf g jdfjhk rjew hdjrurehsgdhrj urjeh h ehurkjytk dhgdgh fdhj djdkjrk
+	    		 gtewyswgs gewqgasg agr qwpoigfuhy pgwhg asd pqurhgñas,mndgñ ngd as</p>
+    		</div>
+    	</div>
+    	
+    	<script type="text/javascript">
+			function ScaleContentToDevice() {
+				scroll(0, 0);
+				var content = $.mobile.getScreenHeight()
+					- $(".ui-header").outerHeight() - $(".ui-footer").outerHeight()
+					- $(".ui-content").outerHeight() + $(".ui-content").height();
+				$(".ui-content").height(content);
+			}
+	
+			$(document).on("pagecontainershow", function() {
+				ScaleContentToDevice();
+			});
+
+			$(window).on("resize orientationchange", function() {
+				ScaleContentToDevice();
+			});
+			
+			$("#registrationPage").on("pageinit", function() {
+				$("#registrationForm").validate({
+					rules: {
+						registrationPasswordVerification: {
+							equalTo: "#registrationPassword"
+						}
+					},
+					errorPlacement: function( error, element ) {
+						error.insertAfter( element.parent() );
+					},
+					submitHandler: function(form) {
+						//$(form).ajaxSubmit();
+						
+						$.mobile.changePage("#petsList");
+					}
+				});
+			});
+		</script>
     </body>
 </html>
